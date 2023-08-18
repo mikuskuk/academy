@@ -1,0 +1,8 @@
+h1 Quizzes
+= @quizzes.count
+
+ul
+- @quizzes.each do |quizz|
+  li = link_to quizz.title, quiz_path(quizz)
+
+= link_to 'New Quiz', new_quiz_path

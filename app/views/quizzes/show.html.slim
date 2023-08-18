@@ -1,0 +1,20 @@
+- presenter = QuizPresenter.new(@quiz)
+
+h1 = @quiz.title
+div = date_in_words(@quiz.created_at)
+
+p = @quiz.description
+
+h3 Questions
+ul  
+  - @quiz.questions.each do |q|
+    li = link_to q.content, quiz_question_path(@quiz, q)
+
+div 
+  = link_to 'Edit', edit_quiz_path(@quiz)
+
+div
+  = button_to 'Destroy this quiz', @quiz, method: :delete
+
+hr
+= link_to 'Back to Quizzes', quizzes_path

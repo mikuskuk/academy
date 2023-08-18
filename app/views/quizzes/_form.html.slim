@@ -1,0 +1,11 @@
+- quiz.errors.full_messages.each do |error|
+  p(style="color: red") = error
+
+= form_with model: quiz do |form|
+  = form.label :title, style: 'display: block;'
+  = form.text_field :title
+  
+  = form.label :description, style: 'display: block;'
+  = form.text_area :description
+
+  = form.submit
