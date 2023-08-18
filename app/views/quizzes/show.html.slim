@@ -4,6 +4,8 @@ h1 = @quiz.title
 div = date_in_words(@quiz.created_at)
 
 p = @quiz.description
+- if @quiz.image.attached?
+= image_tag @quiz.image
 
 h3 Questions
 ul  

@@ -15,16 +15,21 @@ class QuizzesController < ApplicationController
   end
 
   def create
-    @quiz = Quiz.create(quiz_params)
-    if @quiz.persisted?
-      redirect_to @quiz
+    @quiz = Quiz.new(quiz_params)
+    if @quiz.save
+      redirect_to @quiz, notice: 'Yeeee! You created a Quiz!'
     else
+      flash.now.alert = 'Sorry, something went wrong!'
       render :new, status: :unprocessable_entity
     end
   end
 
   def update
-    if @quiz.update(quiz_params)
+    if params[:add_question]
+      @quiz.assign_attributes quiz_params
+      @quiz.questions.build
+      render :edit, status: 200
+    elsif @quiz.update(quiz_params)
       redirect_to @quiz
     else
       render :edit, status: :unprocessable_entity
@@ -51,6 +56,6 @@ class QuizzesController < ApplicationController
   end
 
   def quiz_params
-    params.require(:quiz).permit(:title, :description)
+    params.require(:quiz).permit(:title, :description, :image, questions_attributes: [:id, :content, :answer, :_destroy])
   end
 end

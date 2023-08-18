@@ -1,0 +1,15 @@
+h1 = @quiz.title
+h2 = @question.content
+
+p = @question.answer
+
+div 
+  = link_to 'Edit', edit_quiz_question_path(@quiz, @question)
+
+div
+  = button_to 'Destroy this question', quiz_question_path, method: :delete
+
+hr
+= link_to 'Back to Questions', quiz_question_path
+
+= link_to 'New Question', new_quiz_question_path
